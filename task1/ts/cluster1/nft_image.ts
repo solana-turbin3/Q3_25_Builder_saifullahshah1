@@ -16,13 +16,24 @@ umi.use(signerIdentity(signer));
 (async () => {
     try {
         //1. Load image
+        const image = await readFile("/Users/apple/Desktop/PC/WorkDesk/builder_cohort/Q3_25_Builder_saifullahshah1/task1/ts/cluster1/assets/buddy_selfie.png");
+        
         //2. Convert image to generic file.
-        //3. Upload image
+        const file = createGenericFile(
+            image,
+            "buddy_selfie.png",
+            {
+                contentType : "image/png",
+                extension : "png"
+            },
 
+        );
+
+        //3. Upload image
         // const image = ???
 
-        // const [myUri] = ??? 
-        // console.log("Your image URI: ", myUri);
+        const [myUri] = await umi.uploader.upload([file]);
+        console.log("Your image URI: ", myUri);
     }
     catch(error) {
         console.log("Oops.. Something went wrong", error);
